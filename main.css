@@ -1,1 +1,25 @@
- 
+body
+{
+    margin: 0;
+}
+.backTitle
+{
+    position: relative;
+    text-align: center;
+
+    width:100%;
+    height: auto;
+    display: flex;
+}
+#backTop
+{
+    width:100%;
+}
+#iconTop
+{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height:100%;
+}
