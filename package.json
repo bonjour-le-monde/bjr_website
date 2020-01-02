@@ -1,0 +1,15 @@
+{
+    "name": "bjr_website",
+    "version": "1.0.0",
+    "description": "Site de 'Bonjour le monde'",
+    "main": "node.js",
+    "scripts": {
+        "test": "echo 'Error: no test specified' &amp;&amp; exit 1"
+    },
+    "keywords": [],
+    "author": "glcraft",
+    "license": "GPL",
+    "dependencies": {
+        "express": "^4.16.4"
+    }
+}
