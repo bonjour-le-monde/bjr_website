@@ -30,8 +30,20 @@ body
     transform: translate(-50%, -50%);
     height:100%;
 }
+.tiny   { font-size: 1em; }
+.small  { font-size: 2em; }
+.medium { font-size: 3em; }
+.large  { font-size: 5em; }
 .menu
 {
+        display: table;
+    }
+    .menu-phone
+    {
+        display: none;
+    }
+    .menu
+    {
     width: 100%;
 }
 .menu-item > svg
@@ -49,6 +61,9 @@ text
 .menu-item
 {
     position:relative;
+        position:relative;
+        text-align: center;
+        width: 25%;
 }
 .menu td
 {
@@ -58,6 +73,7 @@ text
 }
 .menu-line
 {
+        margin:0px;
     z-index: -1;
     position: absolute;
     transform: translate(-0%, -100%);
@@ -69,4 +85,41 @@ text
 {
     height: 100%;
     transition: 0.2s ease;
+}
+}
+@media screen and (max-width: 800px) 
+{
+    .menu
+    {
+        display: none;
+    }
+    .menu-phone
+    {
+        display: block;
+    }
+    #mpicon
+    {
+        top:5vh; 
+        z-index: 1;
+    }
+    #mpcase
+    {
+        background-color: #0005;
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        top:0px;
+        transition: 0.2s ease;
+
+        font-family: "BebasNeue-Regular";
+        font-size: 3em;
+    }
+    .mp-case-hidden
+    {
+        left:-100vw;
+    }
+    .mp-case-shown
+    {
+        left:0vw;
+    }
 }
