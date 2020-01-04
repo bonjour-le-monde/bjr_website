@@ -16,11 +16,16 @@ document.addEventListener('DOMContentLoaded', function(){
         var scrollTop = window.scrollY;
         var backTitle=document.getElementsByClassName("backTitle");
         var mpicon=document.getElementById("mpicon");
+        var tableMenu = document.getElementById("menu");
         var maxHeight = backTitle[0].offsetHeight;
         if (scrollTop>maxHeight) {
             mpicon.style.position="fixed";
+            if (!tableMenu.classList.contains("topscreen"))
+                tableMenu.classList.add("topscreen")
         } else {
             mpicon.style.position="static";
+            if (tableMenu.classList.contains("topscreen"))
+                tableMenu.classList.remove("topscreen")
         }
     })
 }, false);

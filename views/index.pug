@@ -15,9 +15,10 @@ html
         .backTitle
             img#iconTop(src="res/icon_bjr.png", alt="icone bonjour le monde")
             img#backTop(src="res/fond_bjr.png", alt="fond bonjour le monde")
-        table.menu
+        table#menu
             each menu, index in menus
-                td.menu-item.unselectable(onclick="displayContent('"+menuFunction[index]+"');")= menu
+                td.menu-item.unselectable(onclick="displayContent('"+menuFunction[index]+"');")
+                    div(style={"z-index": 0})= menu
                     .menu-line(style={'background-color': menuBackground[index]})
         .menu-phone
             i#mpicon.medium.material-icons(onclick=toggleMpCase) dehaze
