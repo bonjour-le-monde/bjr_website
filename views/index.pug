@@ -1,0 +1,39 @@
+- var menus = ["Accueil","Discord","Projets","Mon Compte"]
+- var menuBackground = ["red","orange","green","cyan"]
+- var menuFunction = ["contentAccueil","contentDiscord","contentProjets","contentMonCompte"]
+- var toggleMpCase = "document.getElementById('mpcase').classList.toggle('mp-case-shown');"
+html
+    head
+        meta(charset='utf-8')
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        title Bonjour le monde !
+        link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons")
+        script(src="main.js")
+        link(rel="stylesheet", href="main.css", type='text/css', media='screen')
+        link(rel="shortcut icon", type="image/png", href="res/favicon_bjr.png")
+    body
+        .backTitle
+            img#iconTop(src="res/icon_bjr.png", alt="icone bonjour le monde")
+            img#backTop(src="res/fond_bjr.png", alt="fond bonjour le monde")
+        table.menu
+            each menu, index in menus
+                td.menu-item.unselectable(onclick="displayContent('"+menuFunction[index]+"');")= menu
+                    .menu-line(style={'background-color': menuBackground[index]})
+        .menu-phone
+            i#mpicon.medium.material-icons(onclick=toggleMpCase) dehaze
+            #mpcase.mp-case-hidden(onclick=toggleMpCase)
+                #mpcontainer
+                    img(src="res/icon_bjr.png", alt="icone bonjour le monde", style={width:"20%"})
+                    each menu, index in menus
+                        div(onclick="displayContent('"+menuFunction[index]+"');")= menu
+        #contentAccueil.content-page
+            h1 Bonjour le monde !
+            p Bienvenue sur le site web de Bonjour le monde !
+            - for (var x = 0; x < 50; x++)
+                p= 'Test ' + x.toString()
+
+        #contentDiscord.content-page.hidden
+        #contentProjets.content-page.hidden
+        #contentMonCompte.content-page.hidden
+            h1 Partie en construction
+            p Dès que le système de connexion sera établi, cette page sera accessible. Promis 😁

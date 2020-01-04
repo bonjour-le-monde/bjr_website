@@ -4,6 +4,8 @@ const app = express();
 const router = express.Router();
 const routerRes = express.Router();
 
+app.set("view engine", "pug")
+
 function sendMyFile(res, filename)
 {
     console.log('Sending '+filename+'...')
@@ -15,14 +17,17 @@ routerRes.get(/(.*)/, function (req, res) {
     res.sendFile(path.join(__dirname+'/res/'+filename))
 })
 
-router.get('/', function (req, res) {
-    sendMyFile(res, "index.html")
-})
-router.get(/\/(.*\.(?:css|js|html))/, function (req, res) {
+// router.get('/', function (req, res) {
+//     sendMyFile(res, "index.html")
+// })
+app.get(/\/(.*\.(?:css|js|html))/, function (req, res) {
     sendMyFile(res, req.params[0])
 })
-app.use('/', router);
+// app.use('/', router);
 app.use('/res/', routerRes);
+app.get('/', function (req, res) {
+    res.render("index")
+});
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
 })
