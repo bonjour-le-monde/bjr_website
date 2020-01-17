@@ -5,18 +5,16 @@
 html
     head
         meta(charset='utf-8')
-        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
         title Bonjour le monde !
-        link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons")
-        link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css", integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh", crossorigin="anonymous")
-        script(src="main.js")
-        script(src="https://unpkg.com/axios/dist/axios.min.js")
-        link(rel="stylesheet", href="main.css", type='text/css', media='screen')
-        link(rel="shortcut icon", type="image/png", href="res/favicon_bjr.png")
+        link(rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons")
+        link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous")
+        link(rel="stylesheet" href="main.css" type='text/css' media='screen')
+        link(rel="shortcut icon" type="image/png" href="res/favicon_bjr.png")
     body
         .backTitle
-            img#iconTop(src="res/icon_bjr.png", alt="icone bonjour le monde")
-            img#backTop(src="res/fond_bjr.png", alt="fond bonjour le monde")
+            img#iconTop(src="res/icon_bjr.png" alt="icone bonjour le monde")
+            img#backTop(src="res/fond_bjr.png" alt="fond bonjour le monde")
         table#menu
             each menu, index in menus
                 td.menu-item.unselectable(onclick="displayContent('"+menuFunction[index]+"');")
@@ -26,7 +24,7 @@ html
             i#mpicon.medium.material-icons(onclick=toggleMpCase) dehaze
             #mpcase.mp-case-hidden(onclick=toggleMpCase)
                 #mpcontainer
-                    img(src="res/icon_bjr.png", alt="icone bonjour le monde", style={width:"20%"})
+                    img(src="res/icon_bjr.png" alt="icone bonjour le monde", style={width:"20%"})
                     each menu, index in menus
                         div(onclick="displayContent('"+menuFunction[index]+"');")= menu
         #contentAccueil.content-page.hidden
@@ -39,3 +37,6 @@ html
         #contentProjets.content-page.hidden
         #contentMonCompte.content-page
             include connexion.pug
+
+        script(src="main.js")
+        script(src="https://unpkg.com/axios/dist/axios.min.js")
