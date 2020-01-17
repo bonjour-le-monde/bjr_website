@@ -2,12 +2,14 @@ const express = require('express')
 const path = require('path');
 const axios = require('axios');
 const qs = require('querystring')
+const discordID = require('./discordapps-id')
 const app = express();
 const router = express.Router();
 const routerRes = express.Router();
 require('dotenv').config();
 
 debug = process.env.DEBUG_MODE;
+
 
 app.set("view engine", "pug")
 
@@ -57,6 +59,9 @@ app.use('/connexion', function (req, res){
     })
     // 
 });
+app.get("/getClientID", function (req, res) {
+    res.send(discordID.CLIENT_ID)
+})
 app.use('/res/', routerRes);
 app.get(/\/(?:onconnexion)?/, function (req, res) {
     res.render("index")
