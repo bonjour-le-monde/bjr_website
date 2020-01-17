@@ -5,13 +5,9 @@ const qs = require('querystring')
 const app = express();
 const router = express.Router();
 const routerRes = express.Router();
+require('dotenv').config();
 
-debug=false;
-
-var API_ENDPOINT = 'https://discordapp.com/api'
-var CLIENT_ID = '667490129224532012'
-var CLIENT_SECRET = 'qAWT5BHnUE13ahQ7Xp3P9lSAhGymozUc'
-var REDIRECT_URI = 'http://localhost/onconnexion'
+debug = process.env.DEBUG_MODE;
 
 app.set("view engine", "pug")
 
@@ -21,7 +17,7 @@ function sendMyFile(res, filename)
     res.sendFile(path.join(__dirname+'/'+filename))
 }
 routerRes.get(/(.*)/, function (req, res) {
-    var filename = req.params[0]
+    let filename = req.params[0]
     console.log('Sending resources '+filename+'...')
     res.sendFile(path.join(__dirname+'/res/'+filename))
 })
@@ -33,13 +29,13 @@ app.get(/\/(.*\.(?:css|js|html))/, function (req, res) {
     sendMyFile(res, req.params[0])
 })
 app.use('/connexion', function (req, res){
-    var code = req.body.code;
-    var dataToDiscord = {
-        'client_id': CLIENT_ID,
-        'client_secret': CLIENT_SECRET,
+    let code = req.body.code;
+    let dataToDiscord = {
+        'client_id': process.env.CLIENT_ID,
+        'client_secret': process.env.CLIENT_SECRET,
         'grant_type': 'authorization_code',
         'code': code,
-        'redirect_uri': REDIRECT_URI,
+        'redirect_uri': process.env.REDIRECT_URI,
         'scope': 'identify'
     }
     
@@ -50,7 +46,7 @@ app.use('/connexion', function (req, res){
     console.debug("dataToDiscord: ")
     console.debug(dataToDiscord)
     
-    axios.post(API_ENDPOINT+"/oauth2/token", qs.stringify(dataToDiscord), {headers:{"Content-Type": "application/x-www-form-urlencoded"}})//
+    axios.post(process.env.API_ENDPOINT+"/oauth2/token", qs.stringify(dataToDiscord), {headers:{"Content-Type": "application/x-www-form-urlencoded"}})//
     .then(data=>{
         console.info("OAuth success")
         res.send(data.data)
