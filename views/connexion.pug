@@ -15,8 +15,9 @@
 //-     a.btn.btn-outline-secondary(type="button") <img src="https://img.icons8.com/color/48/000000/discord-logo.png" style="margin: 0 0; width: 1em"> Connexion via discord
 
 .connexion(style="text-align:center;")
-    h1 Connectez vous à votre compte
-    a#connectDiscord.btn.btn-outline-secondary(type="button" href="https://discordapp.com/api/oauth2/authorize?client_id=667490129224532012&redirect_uri=http%3A%2F%2Flocalhost%2Fonconnexion&response_type=code&scope=identify" style="display:inline flex;")
-        img(src="https://img.icons8.com/color/48/000000/discord-logo.png", alt="Discord icon", style="margin: 0 0; width: 2em;") 
-        div Connexion via discord
+    #connectDiscord
+        h1 Connectez vous à votre compte
+        a.btn.btn-outline-secondary(type="button" href="https://discordapp.com/api/oauth2/authorize?client_id=667490129224532012&redirect_uri=http%3A%2F%2Flocalhost%2Fonconnexion&response_type=code&scope=identify" style="display:inline flex;")
+            img(src="https://img.icons8.com/color/48/000000/discord-logo.png", alt="Discord icon", style="margin: 0 0; width: 2em;") 
+            div Connexion via discord
         

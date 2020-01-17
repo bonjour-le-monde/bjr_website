@@ -55,8 +55,8 @@ document.addEventListener('DOMContentLoaded', function(){
             discord.tokens = data.data;
             discord.retrieveUserMe().then(data=>{
                 var button = document.getElementById("connectDiscord")
-                var newElem = document.createElement("h2")
-                newElem.innerHTML = `Connecté à discord - Bienvenue <img class='discordAvatar' style='width: 2em;' src=${discord.getAvatarLink()}> ${discord.me.username}`
+                var newElem = document.createElement("h1")
+                newElem.innerHTML = `Bienvenue <img class='discordAvatar' style='width: 1.5em;' src=${discord.getAvatarLink()}> ${discord.me.username}`
                 button.after(newElem)
                 button.remove()
             })
