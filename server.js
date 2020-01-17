@@ -2,16 +2,23 @@ const express = require('express')
 const path = require('path');
 const axios = require('axios');
 const qs = require('querystring')
+const discordID = require('./discordapps-id')
 const app = express();
 const router = express.Router();
 const routerRes = express.Router();
 
+
 debug=false;
 
 var API_ENDPOINT = 'https://discordapp.com/api'
-var CLIENT_ID = '667490129224532012'
-var CLIENT_SECRET = 'qAWT5BHnUE13ahQ7Xp3P9lSAhGymozUc'
 var REDIRECT_URI = 'http://localhost/onconnexion'
+//////////////////////////////////////////////////////////
+// Disponible dans un fichier ./discordapp-id.js à fournir
+//////////////////////////////////////////////////////////
+// module.exports = {
+//     CLIENT_ID: '',
+//     CLIENT_SECRET: ''
+// }
 
 app.set("view engine", "pug")
 
@@ -35,8 +42,8 @@ app.get(/\/(.*\.(?:css|js|html))/, function (req, res) {
 app.use('/connexion', function (req, res){
     var code = req.body.code;
     var dataToDiscord = {
-        'client_id': CLIENT_ID,
-        'client_secret': CLIENT_SECRET,
+        'client_id': discordID.CLIENT_ID,
+        'client_secret': discordID.CLIENT_SECRET,
         'grant_type': 'authorization_code',
         'code': code,
         'redirect_uri': REDIRECT_URI,
@@ -61,6 +68,9 @@ app.use('/connexion', function (req, res){
     })
     // 
 });
+app.get("/getClientID", function (req, res) {
+    res.send(discordID.CLIENT_ID)
+})
 app.use('/res/', routerRes);
 app.get(/\/(?:onconnexion)?/, function (req, res) {
     res.render("index")
