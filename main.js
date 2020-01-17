@@ -12,6 +12,27 @@ function displayContent(which)
     ctpage.classList.remove("hidden")
 }
 document.addEventListener('DOMContentLoaded', function(){ 
+    if (window.location.pathname=="/onconnexion")
+    {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const code = urlParams.get("code");
+        var promax = axios.post("/connexion", {
+            code: code
+        });
+        promax.then(data=>{
+            var button = document.getElementById("connectDiscord")
+            var newElem = document.createElement("h2")
+            newElem.innerHTML = "Connecté à discord"
+            button.after(newElem)
+            button.remove()
+
+        })
+        .catch(err=>{
+            console.log("error on connection : "+err)
+        });
+
+    }
     window.addEventListener("scroll", function(){
         var scrollTop = window.scrollY;
         var backTitle=document.getElementsByClassName("backTitle");

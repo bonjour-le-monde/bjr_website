@@ -1,0 +1,22 @@
+
+//- .connexion(style="text-align:center;")
+//-     h1 Connectez vous à votre compte
+//-     div(style="text-align:center;width: 20%;margin: 0 auto;")
+//-         .input-group.mb-3
+//-             .input-group-prepend 
+//-                 #basic-addon1.input-group-text E-mail
+//-             input(type="text" class="form-control" placeholder="E-mail" aria-label="E-mail" aria-describedby="basic-addon1")
+//-         .input-group.mb-3
+//-             .input-group-prepend 
+//-                 #basic-addon1.input-group-text Mot de passe
+//-             input(type="password" class="form-control" placeholder="Mot de passe" aria-label="Mot de passe" aria-describedby="basic-addon1")
+//-         button.btn.btn-outline-secondary(type="button") Se connecter
+//-     br
+//-     a.btn.btn-outline-secondary(type="button") <img src="https://img.icons8.com/color/48/000000/discord-logo.png" style="margin: 0 0; width: 1em"> Connexion via discord
+
+.connexion(style="text-align:center;")
+    h1 Connectez vous à votre compte
+    a#connectDiscord.btn.btn-outline-secondary(type="button" href="https://discordapp.com/api/oauth2/authorize?client_id=667490129224532012&redirect_uri=http%3A%2F%2Flocalhost%2Fonconnexion&response_type=code&scope=identify" style="display:inline flex;")
+        img(src="https://img.icons8.com/color/48/000000/discord-logo.png", alt="Discord icon", style="margin: 0 0; width: 2em;") 
+        div Connexion via discord
+        

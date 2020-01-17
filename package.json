@@ -4,13 +4,16 @@
     "description": "Site de 'Bonjour le monde'",
     "main": "node.js",
     "scripts": {
-        "test": "echo 'Error: no test specified' &amp;&amp; exit 1"
+        "test": "echo 'Error: no test specified' &amp;&amp; exit 1",
+        "start": "node.js"
     },
     "keywords": [],
     "author": "glcraft",
     "license": "GPL",
     "dependencies": {
+        "axios": "^0.19.1",
         "express": "^4.16.4",
-        "pug": "^2.0.4"
+        "pug": "^2.0.4",
+        "request": "^2.88.0"
     }
 }

@@ -8,7 +8,9 @@ html
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         title Bonjour le monde !
         link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons")
+        link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css", integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh", crossorigin="anonymous")
         script(src="main.js")
+        script(src="https://unpkg.com/axios/dist/axios.min.js")
         link(rel="stylesheet", href="main.css", type='text/css', media='screen')
         link(rel="shortcut icon", type="image/png", href="res/favicon_bjr.png")
     body
@@ -27,7 +29,7 @@ html
                     img(src="res/icon_bjr.png", alt="icone bonjour le monde", style={width:"20%"})
                     each menu, index in menus
                         div(onclick="displayContent('"+menuFunction[index]+"');")= menu
-        #contentAccueil.content-page
+        #contentAccueil.content-page.hidden
             h1 Bonjour le monde !
             p Bienvenue sur le site web de Bonjour le monde !
             - for (var x = 0; x < 50; x++)
@@ -35,6 +37,5 @@ html
 
         #contentDiscord.content-page.hidden
         #contentProjets.content-page.hidden
-        #contentMonCompte.content-page.hidden
-            h1 Partie en construction
-            p Dès que le système de connexion sera établi, cette page sera accessible. Promis 😁
+        #contentMonCompte.content-page
+            include connexion.pug

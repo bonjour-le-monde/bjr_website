@@ -31,6 +31,18 @@ body
     transform: translate(-50%, -50%);
     height:100%;
 }
+/* Overload Bootstrap */
+.form-control {
+    background-color: #222222;
+}
+.input-group-text {
+    color: aliceblue;
+    background-color: #222222;
+}
+.btn {
+    font-weight: bold;
+}
+
 .tiny   { font-size: 1em; }
 .small  { font-size: 2em; }
 .medium { font-size: 3em; }
