@@ -1,5 +1,10 @@
 discord={
-    getMeUser: function(){
+    getAvatarLink: ()=>{
+        if (!discord.me)
+            return "";
+        return `https://cdn.discordapp.com/avatars/${discord.me.id}/${discord.me.avatar}`;
+    },
+    retrieveUserMe: function(){
         return this.get("/users/@me").then(data=>{
             this.me=data.data;
         }).catch(err=>{
@@ -48,10 +53,10 @@ document.addEventListener('DOMContentLoaded', function(){
             console.log("connexion ok")
             var test=0;
             discord.tokens = data.data;
-            discord.getMeUser().then(data=>{
+            discord.retrieveUserMe().then(data=>{
                 var button = document.getElementById("connectDiscord")
                 var newElem = document.createElement("h2")
-                newElem.innerHTML = "Connecté à discord - Bienvenue "+discord.me.username
+                newElem.innerHTML = `Connecté à discord - Bienvenue <img class='discordAvatar' style='width: 2em;' src=${discord.getAvatarLink()}> ${discord.me.username}`
                 button.after(newElem)
                 button.remove()
             })
