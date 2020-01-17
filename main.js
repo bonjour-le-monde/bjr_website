@@ -1,3 +1,27 @@
+discord={
+    getMeUser: function(){
+        return this.get("/users/@me").then(data=>{
+            this.me=data.data;
+        }).catch(err=>{
+            console.log("error getMeUser : ")
+            console.log(err)
+            console.log(err)
+
+        });
+    },
+    get: url=>{
+        return axios.get(discord.apiEndpoint+url,{
+            headers: {
+                "Authorization": `Bearer ${discord.tokens.access_token}`,
+                "Content-Type": "application/x-www-form-urlencoded" 
+            }
+        })
+    },
+    me:null,
+    tokens:null,
+    apiEndpoint: "https://discordapp.com/api"
+}
+
 function resetContent()
 {
     var ctpages = document.getElementsByClassName("content-page")
@@ -21,11 +45,16 @@ document.addEventListener('DOMContentLoaded', function(){
             code: code
         });
         promax.then(data=>{
-            var button = document.getElementById("connectDiscord")
-            var newElem = document.createElement("h2")
-            newElem.innerHTML = "Connecté à discord"
-            button.after(newElem)
-            button.remove()
+            console.log("connexion ok")
+            var test=0;
+            discord.tokens = data.data;
+            discord.getMeUser().then(data=>{
+                var button = document.getElementById("connectDiscord")
+                var newElem = document.createElement("h2")
+                newElem.innerHTML = "Connecté à discord - Bienvenue "+discord.me.username
+                button.after(newElem)
+                button.remove()
+            })
 
         })
         .catch(err=>{
