@@ -2,7 +2,6 @@ const express = require('express')
 const path = require('path');
 const axios = require('axios');
 const qs = require('querystring')
-const discordID = require('./discordapps-id')
 const app = express();
 const router = express.Router();
 const routerRes = express.Router();
