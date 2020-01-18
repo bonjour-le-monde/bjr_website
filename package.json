@@ -6,16 +6,20 @@
     "scripts": {
         "test": "echo 'Error: no test specified' &amp;&amp; exit 1",
         "start": "node server.js",
-        "ts-compile": "tsc"
+        "ts-compile": "tsc",
+        "ts-watch": "tsc -w"
     },
     "keywords": [],
     "author": "glcraft",
     "license": "GPL",
     "dependencies": {
         "@types/node": "^13.1.8",
+        "@types/passport-oauth2": "^1.4.8",
         "axios": "^0.19.1",
         "dotenv": "^8.2.0",
         "express": "^4.16.4",
+        "express-session": "^1.17.0",
+        "passport": "^0.4.1",
         "passport-oauth2": "^1.5.0",
         "pug": "^2.0.4",
         "request": "^2.88.0",

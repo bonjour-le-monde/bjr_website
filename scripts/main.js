@@ -41,32 +41,15 @@ function displayContent(which)
     ctpage.classList.remove("hidden")
 }
 document.addEventListener('DOMContentLoaded', function(){ 
-    if (window.location.pathname=="/onconnexion")
+    if (typeof express_user !== 'undefined') 
     {
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        const code = urlParams.get("code");
-        var promax = axios.post("/connexion", {
-            code: code
-        });
-        promax.then(data=>{
-            console.log("connexion ok")
-            var test=0;
-            discord.tokens = data.data;
-            discord.retrieveUserMe().then(data=>{
-                var button = document.getElementById("connectDiscord")
-                var newElem = document.createElement("h1")
-                newElem.innerHTML = `Bienvenue <img class='discordAvatar' style='width: 1.5em;' src=${discord.getAvatarLink()}> ${discord.me.username}`
-                button.after(newElem)
-                button.remove()
-            })
-
-        })
-        .catch(err=>{
-            console.log("error on connection : "+err)
-        });
-
+        var button = document.getElementById("connectDiscord")
+        var newElem = document.createElement("h1")
+        newElem.innerHTML = `Bienvenue <img class='discordAvatar' style='width: 1.5em;' src=https://cdn.discordapp.com/avatars/${express_user.id}/${express_user.avatar}> ${express_user.username}`
+        button.after(newElem)
+        button.remove()
     }
+    
     window.addEventListener("scroll", function(){
         var scrollTop = window.scrollY;
         var backTitle=document.getElementsByClassName("backTitle");
