@@ -41,13 +41,13 @@ function displayContent(which)
     ctpage.classList.remove("hidden")
 }
 document.addEventListener('DOMContentLoaded', function(){ 
-    if (typeof express_user !== 'undefined') 
+    if (express_user) 
     {
         var button = document.getElementById("connectDiscord")
         var newElem = document.createElement("h1")
         newElem.innerHTML = `Bienvenue <img class='discordAvatar' style='width: 1.5em;' src=https://cdn.discordapp.com/avatars/${express_user.id}/${express_user.avatar}> ${express_user.username}`
-        button.after(newElem)
-        button.remove()
+        button.parentNode.appendChild(newElem)
+        button.parentNode.removeChild(button)
     }
     
     window.addEventListener("scroll", function(){
