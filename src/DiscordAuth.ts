@@ -37,7 +37,8 @@ export class DiscordAuthenticator implements IAuthenticator {
             tokenURL: `${process.env.API_ENDPOINT}/oauth2/token`,
             clientID: <string>process.env.CLIENT_ID,
             clientSecret: <string>process.env.CLIENT_SECRET,
-            callbackURL: this.getCallbackURL()
+            callbackURL: this.getCallbackURL(),
+            state: true
         },
             async function (accessToken: string, refreshToken: string, profile: any, done: CallableFunction) {
                 const bearer: BearerCredentialHandler = new BearerCredentialHandler(accessToken);
