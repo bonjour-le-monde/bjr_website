@@ -6,12 +6,24 @@ import * as qs from 'querystring';
 import * as dotenv from 'dotenv';
 import { DiscordAuthenticator } from './DiscordAuth';
 import * as passport from 'passport'
+
 const cd = __dirname+'/../';
+
+dotenv.config();
+{
+    let missingVarsEnv: string="";
+    let arrvarenv = ["CLIENT_ID", "CLIENT_SECRET", "MY_URI", "API_ENDPOINT"]
+    arrvarenv.forEach(varEnv => {
+        if (!process.env[varEnv])
+            missingVarsEnv+=`- ${varEnv}\n`
+    });
+    if (missingVarsEnv!=="")
+        throw new Error(`Les variables d'environnements suivante n'ont pas été définies:\n${missingVarsEnv}\n`)
+}
 const app = express();
 
 const router = express.Router();
 const routerRes = express.Router();
-dotenv.config();
 let discordAuth = new DiscordAuthenticator(passport)
 
 let debug: boolean = process.env.DEBUG_MODE=="true";
