@@ -5,7 +5,14 @@ import { BearerCredentialHandler } from 'typed-rest-client/Handlers';
 import { IAuthenticator, SerializedUser } from "./ModuleAuth";
 import { getRepository } from 'typeorm';
 
+class DiscordTokens
+{
+    public access_token: string;
+    public refresh_token: string;
+}
+
 class DiscordUser  {
+    public tokens : DiscordTokens;
     constructor(
         public id: string, 
         public username: string,
