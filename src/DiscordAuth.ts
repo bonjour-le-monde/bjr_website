@@ -49,7 +49,7 @@ export class DiscordAuthenticator implements IAuthenticator {
         },
             async function (accessToken: string, refreshToken: string, profile: any, done: CallableFunction) {
                 const bearer: BearerCredentialHandler = new BearerCredentialHandler(accessToken);
-                const discord: RestClient = new RestClient('nyx (http://github.com/tym17, 1)', `${process.env.API_ENDPOINT}`, [bearer]);
+                const discord: RestClient = new RestClient('nodejs (bjr_website, 1)', `${process.env.API_ENDPOINT}`, [bearer]);
                 const response: IRestResponse<any> = await discord.get(encodeURIComponent('/users/@me'));
                 if (response.statusCode !== 200) {
                     return done(new Error(`Could not get discord user info. Got code ${response.statusCode}`));

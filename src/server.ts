@@ -52,38 +52,10 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get(/\/(.*\.(?:css|js|html))/, function (req, res) {
+app.get(/\/(.*\.(?:css|js))/, function (req, res) {
     sendMyFile(res, req.params[0])
 })
 discordAuth.configureRoutes(app);
-// app.use('/connexion', function (req, res){
-//     let code = req.body.code;
-//     let dataToDiscord = {
-//         'client_id': process.env.CLIENT_ID,
-//         'client_secret': process.env.CLIENT_SECRET,
-//         'grant_type': 'authorization_code',
-//         'code': code,
-//         'redirect_uri': process.env.REDIRECT_URI,
-//         'scope': 'identify'
-//     }
-    
-//     console.debug("req: ")
-//     console.debug(req)
-//     console.debug("code: ")
-//     console.debug(code)
-//     console.debug("dataToDiscord: ")
-//     console.debug(dataToDiscord)
-//     axios.default.post(process.env.API_ENDPOINT+"/oauth2/token", qs.stringify(dataToDiscord), {headers:{"Content-Type": "application/x-www-form-urlencoded"}})//
-//     .then(data=>{
-//         console.info("OAuth success")
-//         res.send(data.data)
-//     })
-//     .catch(err=>{
-//         console.error("OAuth failed: ")
-//         console.error(err)
-//     })
-//     // 
-// });
 app.use('/res/', routerRes);
 app.get("/", function (req, res) {
     if(typeof req.user === 'object' && req.user)
