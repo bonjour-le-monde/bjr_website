@@ -74,16 +74,14 @@ discordAuth.configureRoutes(app);
 // });
 app.use('/res/', routerRes);
 app.get("/", function (req, res) {
-    res.render("index")
+    if(typeof req.user === 'object' && req.user)
+        res.render("index", {
+            user: req.user
+        })
+    else
+        res.render("index")
+
 });
-app.use("/link", (req, res)=>{
-    console.log('link req query: ')
-    console.log(req)
-    res.render("index",{
-        user: req.user
-    })
-    // res.json({test: "haha"})
-})
 app.listen(80, function () {
   console.log('Example app listening on port 80!')
 })
