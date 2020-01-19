@@ -4,8 +4,9 @@ import * as path from 'path';
 import * as axios from 'axios';
 import * as qs from 'querystring';
 import * as dotenv from 'dotenv';
-import { DiscordAuthenticator } from './DiscordAuth';
+import { DiscordAuthenticator, getDiscordTokens } from './DiscordAuth';
 import * as passport from 'passport'
+import {api as discordapi}  from "./Discord"
 
 const cd = __dirname+'/../';
 
@@ -57,6 +58,14 @@ app.get(/\/(.*\.(?:css|js))/, function (req, res) {
 })
 discordAuth.configureRoutes(app);
 app.use('/res/', routerRes);
+app.use(/\/discord\/(.*)/, (req, res) => {
+    console.info(`Discord command "${req.params[0]}"...`)
+    let user: any = req.user;
+    discordapi.usersMe(getDiscordTokens(user.id).access_token).then((usersMe)=>{
+        res.json(usersMe.result);
+    })
+    
+});
 app.get("/", function (req, res) {
     if(typeof req.user === 'object' && req.user)
         res.render("index", {

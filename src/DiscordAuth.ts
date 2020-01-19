@@ -9,6 +9,11 @@ import {api as discordapi}  from "./Discord"
 
 let users: DiscordSessionMap = {};
 
+export function getDiscordTokens(userid: string) : DiscordTokens
+{
+    return users[userid].tokens;
+}
+
 export class DiscordAuthenticator implements IAuthenticator {
     private _passport: any;
 

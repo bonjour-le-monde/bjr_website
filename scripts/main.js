@@ -10,8 +10,6 @@ discord={
         }).catch(err=>{
             console.log("error getMeUser : ")
             console.log(err)
-            console.log(err)
-
         });
     },
     get: url=>{
@@ -43,11 +41,19 @@ function displayContent(which)
 document.addEventListener('DOMContentLoaded', function(){ 
     if (express_user) 
     {
-        var button = document.getElementById("connectDiscord")
+        var button = document.getElementById("connectDiscord");
+        var buttonParent = button.parentNode;
         var newElem = document.createElement("h1")
         newElem.innerHTML = `Bienvenue <img class='discordAvatar' style='width: 1.5em;' src=https://cdn.discordapp.com/avatars/${express_user.id}/${express_user.avatar}> ${express_user.username}`
-        button.parentNode.appendChild(newElem)
-        button.parentNode.removeChild(button)
+        buttonParent.appendChild(newElem)
+        
+        var testElem = document.createElement("h1")
+        axios.get("/discord/usersMe").then((res)=>{
+            testElem.innerHTML = `Test : ${JSON.stringify(res.data)}`
+            buttonParent.appendChild(testElem)
+        })
+        
+        buttonParent.removeChild(button)
     }
     
     window.addEventListener("scroll", function(){
