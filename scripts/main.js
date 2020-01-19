@@ -39,7 +39,7 @@ function displayContent(which)
     ctpage.classList.remove("hidden")
 }
 document.addEventListener('DOMContentLoaded', function(){ 
-    if (express_user) 
+    if (typeof express_user != "undefined") 
     {
         var button = document.getElementById("connectDiscord");
         var buttonParent = button.parentNode;
@@ -63,11 +63,11 @@ document.addEventListener('DOMContentLoaded', function(){
         var tableMenu = document.getElementById("menu");
         var maxHeight = backTitle[0].offsetHeight;
         if (scrollTop>maxHeight) {
-            mpicon.style.position="fixed";
+            mpicon.classList.add("mpicon-topscreen");
             if (!tableMenu.classList.contains("topscreen"))
                 tableMenu.classList.add("topscreen")
         } else {
-            mpicon.style.position="static";
+            mpicon.classList.remove("mpicon-topscreen");
             if (tableMenu.classList.contains("topscreen"))
                 tableMenu.classList.remove("topscreen")
         }

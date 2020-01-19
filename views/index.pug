@@ -28,7 +28,9 @@ html
                 #mpcontainer
                     img(src="res/icon_bjr.png" alt="icone bonjour le monde", style={width:"20%"})
                     each menu, index in menus
-                        div(onclick="displayContent('"+menuFunction[index]+"');")= menu
+                        div(style={'display': 'flex'})
+                            div(style={'background-color': menuBackground[index], 'width': '0.1em', 'height': '1.5em'})
+                            div(onclick="displayContent('"+menuFunction[index]+"');")= menu
         #contentAccueil.content-page.hidden
             h1 Bonjour le monde !
             p Bienvenue sur le site web de Bonjour le monde !
@@ -41,6 +43,7 @@ html
             include connexion.pug
 
         script(src="https://unpkg.com/axios/dist/axios.min.js")
-        script(type='text/javascript'). 
-            express_user = !{JSON.stringify(user)}
+        if (user)
+            script(type='text/javascript'). 
+                express_user = !{JSON.stringify(user)}
         script(src="scripts/main.js")

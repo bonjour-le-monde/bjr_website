@@ -136,7 +136,7 @@ h1
 }
 @media screen and (max-width: 800px) 
 {
-    .menu
+    #menu
     {
         display: none;
     }
@@ -146,17 +146,31 @@ h1
     }
     #mpicon
     {
-        top:5vh; 
+        background-color:  #333333D0;
+        border-radius: 5px;
+        position: static;
+        top:0px; 
+        left:0px; 
         z-index: 1;
+        transition:  0.5s ease;
+    }
+    #mpicon.mpicon-topscreen
+    {
+        position: fixed;
+        top:20px; 
+        left:20px; 
+        transition:  0.5s ease;
+
     }
     #mpcase
     {
-        background-color: #0005;
+        background-color:  #333333D0;
         width: 100vw;
         height: 100vh;
         position: fixed;
         top:0px;
-        transition: 0.2s ease;
+        z-index: 2;
+        
 
         font-family: "BebasNeue-Regular";
         font-size: 3em;
