@@ -43,7 +43,7 @@ html
             include connexion.pug
 
         script(src="https://unpkg.com/axios/dist/axios.min.js")
-        if (user)
+        if (data)
             script(type='text/javascript'). 
-                express_user = !{JSON.stringify(user)}
+                express_data = !{JSON.stringify(data)}
         script(src="scripts/main.js")

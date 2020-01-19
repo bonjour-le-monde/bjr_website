@@ -9,6 +9,8 @@ import * as passport from 'passport'
 import {api as discordapi}  from "./Discord"
 
 const cd = __dirname+'/../';
+let arrayMenus = ["Accueil","Discord","Projets","MonCompte"]
+let regHome = new RegExp(`\/(${arrayMenus.join("|")})?`);
 
 dotenv.config();
 {
@@ -66,13 +68,16 @@ app.use(/\/discord\/(.*)/, (req, res) => {
     })
     
 });
-app.get("/", function (req, res) {
+app.get(regHome, function (req, res) {
+    let obView:any = {}
+    
     if(typeof req.user === 'object' && req.user)
-        res.render("index", {
-            user: req.user
-        })
-    else
-        res.render("index")
+        obView.user = req.user 
+    if (req.params[0]!=="")
+    {
+        obView.which = "content"+req.params[0]
+    }
+    res.render("index", {data: obView})
 
 });
 app.listen(80, function () {

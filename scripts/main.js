@@ -46,12 +46,16 @@ function displayContent(which, pushHistory=true)
     
 }
 document.addEventListener('DOMContentLoaded', function(){ 
-    if (typeof express_user != "undefined") 
+    if (typeof express_data.which != "undefined") 
+    {
+        displayContent(express_data.which, false)
+    }
+    if (typeof express_data.user != "undefined") 
     {
         var button = document.getElementById("connectDiscord");
         var buttonParent = button.parentNode;
         var newElem = document.createElement("h1")
-        newElem.innerHTML = `Bienvenue <img class='discordAvatar' style='width: 1.5em;' src=https://cdn.discordapp.com/avatars/${express_user.id}/${express_user.avatar}> ${express_user.username}`
+        newElem.innerHTML = `Bienvenue <img class='discordAvatar' style='width: 1.5em;' src=https://cdn.discordapp.com/avatars/${express_data.user.id}/${express_data.user.avatar}> ${express_data.user.username}`
         buttonParent.appendChild(newElem)
         
         var testElem = document.createElement("h1")
