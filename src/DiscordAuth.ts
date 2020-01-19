@@ -7,12 +7,13 @@ import { getRepository } from 'typeorm';
 
 class DiscordTokens
 {
-    public access_token: string;
-    public refresh_token: string;
+    constructor(
+        public access_token: string,
+        public refresh_token: string
+    ) {}
 }
 
 class DiscordUser  {
-    public tokens : DiscordTokens;
     constructor(
         public id: string, 
         public username: string,
@@ -25,7 +26,15 @@ class DiscordUser  {
     }
 }
 
-let users: any = {};
+class DiscordSession {
+    public user : DiscordUser;
+    public tokens : DiscordTokens;
+}
+interface DiscordSessionMap {
+    [id: string]: DiscordSession;
+}
+
+let users: DiscordSessionMap = {};
 
 export class DiscordAuthenticator implements IAuthenticator {
     private _passport: any;
@@ -54,26 +63,23 @@ export class DiscordAuthenticator implements IAuthenticator {
                 if (response.statusCode !== 200) {
                     return done(new Error(`Could not get discord user info. Got code ${response.statusCode}`));
                 }
-                const discordUser: DiscordUser = Object.assign(new DiscordUser('', '', '', ''), response.result);
+                let discordSess = new DiscordSession;
+                discordSess.user = Object.assign(new DiscordUser('', '', '', ''), response.result);
+                discordSess.tokens = new DiscordTokens(accessToken, refreshToken);
 
-                // const clientRepository = getRepository(Client);
-                // let client: Client | undefined;
-                // Des trucs avec des choses
-                users[discordUser.id] = discordUser;
-                return done(null, discordUser);
+                users[discordSess.user.id] = discordSess;
+                return done(null, discordSess.user);
             })
         );
         
-        passport.serializeUser(function(user, done) {
-            console.log("serializeUser: ")
-            console.log(user)
+        passport.serializeUser(function(user: DiscordUser, done) {
             done(null, user.id);
         });
         
         passport.deserializeUser(function(id, done) {
             
             if (users.hasOwnProperty(id))
-                done(null, users[id]);
+                done(null, users[id].user);
             else
                 done("user not found", null);
             
@@ -93,5 +99,4 @@ export class DiscordAuthenticator implements IAuthenticator {
             failureRedirect: '/nologin'
         }));
     }
-
 }
