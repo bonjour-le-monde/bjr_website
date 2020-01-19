@@ -78,3 +78,6 @@ app.get("/", function (req, res) {
 app.listen(80, function () {
   console.log('Example app listening on port 80!')
 })
+process.on("exit", (code)=>{
+    console.info("Stop nodejs server")
+})
