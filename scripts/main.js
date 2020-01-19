@@ -32,11 +32,18 @@ function resetContent()
         ctpage.classList.add('hidden')
     });
 }
-function displayContent(which)
+function displayContent(which, pushHistory=true)
 {
     resetContent()
     var ctpage=document.getElementById(which);
     ctpage.classList.remove("hidden")
+    if (pushHistory)
+    {
+        let nameRes = /content(.+)/.exec(which)
+        let name = nameRes[1]
+        window.history.pushState({page : name, disp: which}, `Bonjour le monde - ${name}`, `/${name}`);
+    }
+    
 }
 document.addEventListener('DOMContentLoaded', function(){ 
     if (typeof express_user != "undefined") 
@@ -56,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function(){
         buttonParent.removeChild(button)
     }
     
-    window.addEventListener("scroll", function(){
+    window.onscroll = ()=>{
         var scrollTop = window.scrollY;
         var backTitle=document.getElementsByClassName("backTitle");
         var mpicon=document.getElementById("mpicon");
@@ -71,5 +78,11 @@ document.addEventListener('DOMContentLoaded', function(){
             if (tableMenu.classList.contains("topscreen"))
                 tableMenu.classList.remove("topscreen")
         }
-    })
+    }
+    window.onpopstate = function(event) {
+        if (event.state===null)
+            this.displayContent("contentAccueil", false)
+        else
+            this.displayContent(event.state.disp, false)
+    };
 }, false);
