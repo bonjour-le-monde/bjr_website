@@ -4,35 +4,8 @@ import { RestClient, IRestResponse } from 'typed-rest-client';
 import { BearerCredentialHandler } from 'typed-rest-client/Handlers';
 import { IAuthenticator, SerializedUser } from "./ModuleAuth";
 import { getRepository } from 'typeorm';
-
-class DiscordTokens
-{
-    constructor(
-        public access_token: string,
-        public refresh_token: string
-    ) {}
-}
-
-class DiscordUser  {
-    constructor(
-        public id: string, 
-        public username: string,
-        public avatar: string,
-        public discriminator: string
-    ) {}
-
-    getCompleteName(): string {
-        return `${this.username}#${this.discriminator}`;
-    }
-}
-
-class DiscordSession {
-    public user : DiscordUser;
-    public tokens : DiscordTokens;
-}
-interface DiscordSessionMap {
-    [id: string]: DiscordSession;
-}
+import {DiscordSessionMap, DiscordUser, DiscordSession, DiscordTokens} from "./Discord"
+import {api as discordapi}  from "./Discord"
 
 let users: DiscordSessionMap = {};
 
@@ -57,9 +30,8 @@ export class DiscordAuthenticator implements IAuthenticator {
             state: true
         },
             async function (accessToken: string, refreshToken: string, profile: any, done: CallableFunction) {
-                const bearer: BearerCredentialHandler = new BearerCredentialHandler(accessToken);
-                const discord: RestClient = new RestClient('nodejs (bjr_website, 1)', `${process.env.API_ENDPOINT}`, [bearer]);
-                const response: IRestResponse<any> = await discord.get(encodeURIComponent('/users/@me'));
+                const response = await discordapi.usersMe(accessToken);
+                
                 if (response.statusCode !== 200) {
                     return done(new Error(`Could not get discord user info. Got code ${response.statusCode}`));
                 }
